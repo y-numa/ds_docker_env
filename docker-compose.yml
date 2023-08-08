@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  ubuntu:
+    build: .
+    container_name: sample
+    restart: always
+    tty: true
+    platform: linux/amd64
+    #コンテナ内部ポート定義
+    expose:
+      - '22'
+      - '80'
+      - '443'
+      - '8080'
+
+    #ポート変換設定 ホストOSポート:内部ポート
+    ports:
+      - '10000:22'
+      - '10001:80'
+      - '10002:443'
+      - '10003:8080'
+
+    #マウント設定
+    volumes:
+      - ./workdir:/root
+      - ./.vscode-server/:/root/.vscode-server/
